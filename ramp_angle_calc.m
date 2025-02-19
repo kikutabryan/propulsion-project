@@ -6,11 +6,15 @@ function main()
     gamma = 1.4;  % Gas constant
 
     % Initial guess for betas in degrees
-    beta_initial = [10, 10, 10];
+    beta_initial = 10 * ones(1, n);
 
-    % Solve using fsolve
+    % Lower and upper bounds for betas in degrees
+    lb = 0 * ones(1, n);
+    ub = 90 * ones(1, n);
+
+    % Solve using lsqnonlin with bounds
     options = optimset('Display', 'iter');  % Display iterations
-    betas = fsolve(@(beta) shock_equations(beta, M_1, M_n, n, gamma), beta_initial, options);
+    betas = lsqnonlin(@(beta) shock_equations(beta, M_1, M_n, n, gamma), beta_initial, lb, ub, options);
 
     % Compute final Mach numbers and deflection angles
     [final_mach_numbers, deflection_angles, total_deflection_angles] = compute_final_values(M_1, betas, n, gamma);
@@ -43,7 +47,7 @@ function delta = compute_deflection(M_1, gamma, beta)
     delta = atand(tan_delta);
 end
 
-% Function for computing  new mach number after normal shock
+% Function for computing new mach number after normal shock
 function M_2 = compute_normal_mach(M_1, gamma)
     M_2_2 = (M_1^2 + 2 / (gamma - 1)) / (2 * gamma / (gamma - 1) * M_1^2 - 1);
     M_2 = sqrt(M_2_2);
