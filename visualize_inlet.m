@@ -56,8 +56,8 @@ function visualize_inlet()
             % Ensure label is on the right side 
             % Calculate vector perpendicular to shock line
             shock_vector = intersection - ramp_points(:, i);
-            perp_vector = [shock_vector(2); -shock_vector(1)]; % 90 degrees counterclockwise
-            perp_vector = perp_vector / norm(perp_vector) * 0.03; % Reduced from 0.05 to 0.03
+            perp_vector = [shock_vector(2); -shock_vector(1)];
+            perp_vector = perp_vector / norm(perp_vector) * 0.03;
             
             % Check if perpendicular vector points to the right, if not, reverse it
             if perp_vector(1) < 0
@@ -67,12 +67,12 @@ function visualize_inlet()
             % Add the beta angle label
             text(mid_point(1) + perp_vector(1), mid_point(2) + perp_vector(2), ...
                  ['\beta_' num2str(i) ' = ' num2str(betas(i), '%.1f') '°'], ...
-                 'FontSize', 9, 'HorizontalAlignment', 'left'); % Reduced font size to 9
+                 'FontSize', 9, 'HorizontalAlignment', 'left');
         else
             % Label for normal shock
             mid_point = 0.6 * ramp_points(:, i) + 0.4 * intersection;
             text(mid_point(1) + 0.03, mid_point(2), 'Normal Shock', ...
-                 'FontSize', 9, 'HorizontalAlignment', 'left'); % Reduced offset and font size
+                 'FontSize', 9, 'HorizontalAlignment', 'left');
         end
     end
     
@@ -90,8 +90,8 @@ function visualize_inlet()
         ramp_vector = ramp_points(:, i+1) - ramp_points(:, i);
         
         % Calculate perpendicular vector (pointing to the right)
-        perp_vector = [ramp_vector(2); -ramp_vector(1)]; % 90 degrees counterclockwise
-        perp_vector = perp_vector / norm(perp_vector) * 0.03; % Reduced from 0.05 to 0.03
+        perp_vector = [ramp_vector(2); -ramp_vector(1)];
+        perp_vector = perp_vector / norm(perp_vector) * 0.03;
         
         % Check if perpendicular vector points to the right, if not, reverse it
         if perp_vector(1) < 0
@@ -101,7 +101,7 @@ function visualize_inlet()
         % Add the deflection angle label
         text(mid_point(1) + perp_vector(1), mid_point(2) + perp_vector(2), ...
              ['\delta_' num2str(i) ' = ' num2str(deflection_angles(i), '%.1f') '°'], ...
-             'FontSize', 9, 'HorizontalAlignment', 'left'); % Reduced font size to 9
+             'FontSize', 9, 'HorizontalAlignment', 'left');
     end
     
     % Add labels
