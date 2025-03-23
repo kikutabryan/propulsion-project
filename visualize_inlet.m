@@ -1,4 +1,21 @@
 function visualize_inlet()
+    %VISUALIZE_INLET Generate a visualization of a multi-ramp inlet with shock waves
+    %   VISUALIZE_INLET()
+    %
+    %   Creates a detailed visualization of a multi-ramp supersonic inlet
+    %   showing the ramp geometry, shock waves, and relevant angles (beta and delta).
+    %   The function calls ramp_angle_calc() to obtain the necessary flow parameters
+    %   and then generates a properly scaled plot with labeled angles.
+    %
+    %   The visualization includes:
+    %     - Inlet ramp geometry
+    %     - Oblique shock waves and normal shock
+    %     - Shock angle (beta) labels
+    %     - Deflection angle (delta) labels
+    %
+    %   This function has no inputs or outputs, but produces a figure window
+    %   with the visualization.
+    
     % Run the calculation first to get the angles
     [betas, deflection_angles, total_deflection_angles, ~, ~, ~] = ramp_angle_calc();
     
@@ -132,6 +149,21 @@ function visualize_inlet()
 end
 
 function intersection = find_intersection(p1, angle1, p2, angle2)
+    %FIND_INTERSECTION Find the intersection point of two lines
+    %   INTERSECTION = FIND_INTERSECTION(P1, ANGLE1, P2, ANGLE2)
+    %
+    %   Calculates the intersection point of two lines, each defined by
+    %   a point and an angle.
+    %
+    %   Inputs:
+    %       P1 - [x; y] coordinates of a point on the first line
+    %       ANGLE1 - Angle of the first line in degrees from horizontal
+    %       P2 - [x; y] coordinates of a point on the second line
+    %       ANGLE2 - Angle of the second line in degrees from horizontal
+    %
+    %   Output:
+    %       INTERSECTION - [x; y] coordinates of the intersection point
+    
     % Calculate slopes
     m1 = tand(angle1);
     m2 = tand(angle2);
